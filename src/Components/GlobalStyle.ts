@@ -10,4 +10,9 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
+
+.react-resizable-handle::after {
+    border-right: 2px solid ${({ theme }) => theme.buttonText} !important;
+    border-bottom: 2px solid ${({ theme }) => theme.buttonText} !important;
+  }
 `;
