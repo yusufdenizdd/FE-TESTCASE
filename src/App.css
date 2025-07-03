@@ -1,0 +1,32 @@
+.no-focus-form:focus {
+  background-color: unset;
+  border-color: unset;
+  box-shadow: unset;
+}
+
+.no-focus-dark-form {
+  background-color: unset;
+  color: white;
+}
+
+.no-focus-dark-form::placeholder {
+  color: white;
+}
+.no-focus-dark-form:focus {
+  background-color: unset;
+  border-color: white;
+  box-shadow: unset;
+  color: white;
+}
+
+.card-wrapper.no-resize .react-resizable-handle {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+.card-wrapper.no-resize {
+  pointer-events: none;
+}
+.card-wrapper.no-resize * {
+  pointer-events: auto;
+}
