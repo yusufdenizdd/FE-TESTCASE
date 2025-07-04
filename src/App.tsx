@@ -48,7 +48,6 @@ export default function App({
     const w = breakpoint === "sm" ? 3 : 2;
     const h = 7;
 
-    // x'e göre y'lerin en son yüksekliğini takip et
     const colHeights = Array(cols).fill(0);
     for (const item of layout) {
       for (let x = item.x; x < item.x + item.w; x++) {
@@ -56,7 +55,6 @@ export default function App({
       }
     }
 
-    // En az dolu olan sütun bloğunu bul
     let minY = Infinity;
     let bestX = 0;
     for (let x = 0; x <= cols - w; x++) {
@@ -87,14 +85,12 @@ export default function App({
     const updatedGallery = cloneDeep(galleryLayouts);
     const updatedList = cloneDeep(listLayouts);
 
-    // GALLERY görünümü için boş alanlara göre yerleştir
     for (const key of Object.keys(updatedGallery) as BreakpointType[]) {
       const layout = updatedGallery[key];
       const { x, y, w, h } = getNextPosition(key, layout, columnCounts[key]);
       layout.push({ i: newId, x, y, w, h });
     }
 
-    // LIST görünümü için sadece en alta ekle (y'ye göre)
     for (const key of Object.keys(updatedList) as BreakpointType[]) {
       const layout = updatedList[key];
       const y =

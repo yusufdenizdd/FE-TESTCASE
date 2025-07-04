@@ -1,5 +1,5 @@
 const GalleryViewIcon = ({
-  color = "currentColor",
+  color,
   size = 24,
 }: {
   color?: string;
@@ -21,7 +21,7 @@ const GalleryViewIcon = ({
       width="24"
       height="24"
     >
-      <rect width="24" height="24" fill="currentColor" />
+      <rect width="24" height="24" fill={color} />
     </mask>
     <g mask="url(#mask0_643_2069)">
       <path

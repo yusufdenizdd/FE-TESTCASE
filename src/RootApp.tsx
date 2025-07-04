@@ -1,8 +1,8 @@
 import App from "./App.tsx";
-import "./App.css";
+import "./styles-and-themes/App.css";
 import { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme } from "./Components/theme.ts";
-import { GlobalStyle } from "./Components/GlobalStyle.ts";
+import { lightTheme, darkTheme } from "./styles-and-themes/theme.ts";
+import { GlobalStyle } from "./styles-and-themes/GlobalStyle.ts";
 import { useState } from "react";
 
 export default function RootApp() {

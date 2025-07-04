@@ -12,24 +12,21 @@ const initialLayouts = {
   md: [
     { i: "card-1", x: 0, y: 0, w: 2, h: 7 },
     { i: "card-2", x: 2, y: 0, w: 2, h: 7 },
-    { i: "card-3", x: 0, y: 2, w: 2, h: 7 },
+    { i: "card-3", x: 0, y: 7, w: 2, h: 7 },
   ],
   sm: [
     { i: "card-1", x: 0, y: 0, w: 3, h: 7 },
-    { i: "card-2", x: 0, y: 2, w: 3, h: 7 },
-    { i: "card-3", x: 0, y: 4, w: 3, h: 7 },
+    { i: "card-2", x: 0, y: 7, w: 3, h: 7 },
+    { i: "card-3", x: 0, y: 14, w: 3, h: 7 },
   ],
   xs: [
     { i: "card-1", x: 0, y: 0, w: 2, h: 7 },
-    { i: "card-2", x: 0, y: 2, w: 2, h: 7 },
-    { i: "card-3", x: 0, y: 4, w: 2, h: 7 },
+    { i: "card-2", x: 0, y: 7, w: 2, h: 7 },
+    { i: "card-3", x: 0, y: 14, w: 2, h: 7 },
   ],
 };
 
-function adjustLayoutForView(
-  layouts: Layouts,
-  view: "gallery" | "list"
-): Layouts {
+function adjustLayoutForView(layouts: Layouts, view: ViewType): Layouts {
   const columnCounts =
     view === "list"
       ? { lg: 1, md: 1, sm: 1, xs: 1 }
@@ -41,7 +38,6 @@ function adjustLayoutForView(
     const defaultW = view === "list" ? 1 : bp === "sm" ? 3 : 2;
     const cols = view === "list" ? 1 : columnCounts[bp];
 
-    // Eski y değerini kaybetmeden sıralamayı koruyalım
     const sorted = [...updated[bp]].sort((a, b) => a.y - b.y);
 
     updated[bp] = sorted.map((item, index) => {
