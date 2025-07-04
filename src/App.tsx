@@ -4,7 +4,7 @@ import "react-resizable/css/styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CardItem from "./Components/CardItem";
 import Form from "react-bootstrap/Form";
-import { InputGroup } from "react-bootstrap";
+import { Col, InputGroup, Row } from "react-bootstrap";
 import CustomButton from "./Components/CustomButton";
 import { useState } from "react";
 import type { LayoutItem, BreakpointType } from "../types";
@@ -13,6 +13,7 @@ import type { Layouts } from "react-grid-layout";
 import { ToggleView } from "./Components/ToggleButton";
 import { useAppStore } from "./stores/useStore";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
+import { LogoutIcon } from "./assets/LogoutIcon";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -24,10 +25,14 @@ export default function App({
   toggleTheme: () => void;
 }) {
   const {
+    username,
+    isLogged,
     view,
     cards,
     galleryLayouts,
     listLayouts,
+    setUsername,
+    setIsLogged,
     setView,
     setCards,
     setGalleryLayouts,
@@ -157,6 +162,61 @@ export default function App({
   const [currentBreakpoint, setCurrentBreakpoint] =
     useState<BreakpointType>("lg");
 
+  if (!isLogged) {
+    return (
+      <>
+        <div className="d-flex justify-content-center align-items-center vh-100">
+          <DarkModeSwitch
+            style={{
+              position: "fixed",
+              top: "0",
+              left: "0",
+            }}
+            checked={isDark}
+            onChange={toggleTheme}
+            size={120}
+          />
+          <Form
+            className="login-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (username.trim() !== "") {
+                setIsLogged();
+              } else {
+                alert("Kullanıcı adı boş olamaz");
+              }
+            }}
+          >
+            <Form.Group as={Row}>
+              <Form.Label
+                column
+                sm="3"
+                htmlFor="kullaniciadi"
+                className="text-nowrap"
+              >
+                Kullanıcı Adı:
+              </Form.Label>
+              <Col sm={9}>
+                <InputGroup className="">
+                  <Form.Control
+                    id="kullaniciadi"
+                    type="text"
+                    value={username}
+                    className={
+                      isDark ? "no-focus-dark-form-login" : "no-focus-form"
+                    }
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  <CustomButton>Giriş Yap </CustomButton>
+                </InputGroup>
+              </Col>
+            </Form.Group>
+          </Form>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <DarkModeSwitch
@@ -166,6 +226,17 @@ export default function App({
         size={120}
       />
       <ToggleView isDark={isDark} view={view} setView={setView} />
+      <LogoutIcon
+        onClick={setIsLogged}
+        width="72px"
+        height="72px"
+        style={{
+          color: isDark ? "#ffffff" : "#000000",
+          float: "right",
+          marginTop: "50px",
+          cursor: "pointer",
+        }}
+      />
       <Form onSubmit={handleSubmit}>
         <InputGroup className="mx-auto w-75 mt-5">
           <Form.Control

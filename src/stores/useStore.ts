@@ -55,11 +55,15 @@ function adjustLayoutForView(layouts: Layouts, view: ViewType): Layouts {
 }
 
 interface AppState {
+  username: string;
+  isLogged: boolean;
   view: ViewType;
   cards: Card[];
   galleryLayouts: Layouts;
   listLayouts: Layouts;
 
+  setUsername: (username: string) => void;
+  setIsLogged: () => void;
   setView: (view: ViewType) => void;
   setCards: (cards: Card[]) => void;
   setGalleryLayouts: (layouts: Layouts) => void;
@@ -67,6 +71,8 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set) => ({
+  username: "",
+  isLogged: false,
   view: (localStorage.getItem("view") as ViewType) ?? "gallery",
   cards: localStorage.getItem("cards")
     ? JSON.parse(localStorage.getItem("cards")!)
@@ -81,6 +87,17 @@ export const useAppStore = create<AppState>((set) => ({
   listLayouts: localStorage.getItem("listLayouts")
     ? JSON.parse(localStorage.getItem("listLayouts")!)
     : adjustLayoutForView(initialLayouts, "list"),
+
+  setUsername: (username) =>
+    set(() => ({
+      username,
+    })),
+
+  setIsLogged: () =>
+    set((state) => ({
+      isLogged: !state.isLogged,
+    })),
+
   setView: (view) =>
     set(() => {
       localStorage.setItem("view", view);
