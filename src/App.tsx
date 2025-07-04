@@ -105,11 +105,13 @@ export default function App({
   };
 
   const toggleVisibility = (id: string) => {
-    setCards(
-      cards.map((card) =>
-        card.id === id ? { ...card, isVisible: !card.isVisible } : card
-      )
+    const updatedCards = cards.map((card) =>
+      card.id === id ? { ...card, isVisible: !card.isVisible } : card
     );
+    setCards(updatedCards);
+
+    const cardNowVisible =
+      updatedCards.find((card) => card.id === id)?.isVisible ?? true;
 
     const updateVisibilityInLayouts = (layouts: Layouts): Layouts => {
       const updated = cloneDeep(layouts);
@@ -118,14 +120,13 @@ export default function App({
         updated[key] = updated[key].map((item) => {
           if (item.i !== id) return item;
 
-          const isHidden = item.h === 1;
           const visibleW = key === "sm" ? 3 : 2;
           const hiddenW = 1;
 
           return {
             ...item,
-            h: isHidden ? 7 : 1,
-            w: isHidden ? visibleW : hiddenW,
+            h: cardNowVisible ? 7 : 1,
+            w: cardNowVisible ? visibleW : hiddenW,
           };
         });
       });
