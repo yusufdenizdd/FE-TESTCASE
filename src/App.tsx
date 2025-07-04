@@ -76,7 +76,7 @@ export default function App({
     e.preventDefault();
     if (!cardName.trim()) return;
 
-    const newId = `card-${cards.length + 1}`;
+    const newId = `card-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
     const newCard = { id: newId, text: cardName, isVisible: true };
     setCards([...cards, newCard]);
 
@@ -178,7 +178,7 @@ export default function App({
         </InputGroup>
       </Form>
       <ResponsiveGridLayout
-        key={view + currentBreakpoint}
+        key={view}
         onBreakpointChange={(breakpoint) => {
           setCurrentBreakpoint(breakpoint as BreakpointType);
         }}

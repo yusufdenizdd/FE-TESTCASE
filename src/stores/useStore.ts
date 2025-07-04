@@ -81,21 +81,27 @@ export const useAppStore = create<AppState>((set) => ({
   listLayouts: localStorage.getItem("listLayouts")
     ? JSON.parse(localStorage.getItem("listLayouts")!)
     : adjustLayoutForView(initialLayouts, "list"),
+  setView: (view) =>
+    set(() => {
+      localStorage.setItem("view", view);
+      return { view };
+    }),
 
-  setView: (view) => {
-    localStorage.setItem("view", view);
-    set({ view });
-  },
-  setCards: (cards) => {
-    localStorage.setItem("cards", JSON.stringify(cards));
-    set({ cards });
-  },
-  setGalleryLayouts: (layouts) => {
-    localStorage.setItem("galleryLayouts", JSON.stringify(layouts));
-    set({ galleryLayouts: layouts });
-  },
-  setListLayouts: (layouts) => {
-    localStorage.setItem("listLayouts", JSON.stringify(layouts));
-    set({ listLayouts: layouts });
-  },
+  setCards: (cards) =>
+    set(() => {
+      localStorage.setItem("cards", JSON.stringify(cards));
+      return { cards };
+    }),
+
+  setGalleryLayouts: (layouts) =>
+    set(() => {
+      localStorage.setItem("galleryLayouts", JSON.stringify(layouts));
+      return { galleryLayouts: layouts };
+    }),
+
+  setListLayouts: (layouts) =>
+    set(() => {
+      localStorage.setItem("listLayouts", JSON.stringify(layouts));
+      return { listLayouts: layouts };
+    }),
 }));
