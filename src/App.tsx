@@ -81,7 +81,9 @@ export default function App({
     e.preventDefault();
     if (!cardName.trim()) return;
 
-    const newId = `card-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+    const newId = `${username}-card-${Date.now()}-${Math.floor(
+      Math.random() * 10000
+    )}`;
     const newCard = { id: newId, text: cardName, isVisible: true };
     setCards([...cards, newCard]);
 
@@ -228,6 +230,7 @@ export default function App({
       <ToggleView isDark={isDark} view={view} setView={setView} />
       <LogoutIcon
         onClick={() => {
+          localStorage.removeItem("username");
           setUsername("");
           setIsLogged();
         }}

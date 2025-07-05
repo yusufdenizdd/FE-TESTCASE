@@ -11,7 +11,7 @@ Bu proje, kullanıcıların kart ekleyip silebildiği, sürükleyip yeniden konu
 - 👁️ **Kart gizleme / gösterme**
 - 🌓 **Karanlık / Aydınlık tema** geçişi
 - 🖼️ **Galeri görünümü** ve 📄 **Liste görünümü**
-- 💾 Tüm düzenlemeler `localStorage` ile kaydedilir
+- 💾 Tüm düzenlemeler `localStorage` ile **kullanıcıya özel olarak** kaydedilir
 - 📱 Responsive tasarım (farklı ekran boyutları için ayrı grid yerleşimleri)
 
 ## ⚙️ Teknolojiler
