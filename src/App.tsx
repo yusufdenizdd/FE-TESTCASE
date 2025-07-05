@@ -288,7 +288,8 @@ export default function App({
             <div
               key={card.id}
               className={
-                card.isVisible ? "card-wrapper" : "card-wrapper no-resize"
+                (card.isVisible ? "card-wrapper" : "card-wrapper no-resize") +
+                (view === "list" ? " no-resize" : "")
               }
               style={{ zIndex: 10, pointerEvents: "auto" }}
             >
