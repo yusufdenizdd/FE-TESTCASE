@@ -227,7 +227,10 @@ export default function App({
       />
       <ToggleView isDark={isDark} view={view} setView={setView} />
       <LogoutIcon
-        onClick={setIsLogged}
+        onClick={() => {
+          setUsername("");
+          setIsLogged();
+        }}
         width="72px"
         height="72px"
         style={{
