@@ -255,6 +255,18 @@ export default function App({
           <CustomButton>Yeni kart ekle </CustomButton>
         </InputGroup>
       </Form>
+      {cards.length === 0 && (
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "3rem",
+            fontSize: "1.25rem",
+            color: isDark ? "#ccc" : "#333",
+          }}
+        >
+          Henüz hiç kart eklemediniz. Yukarıdan yeni kart oluşturabilirsiniz.
+        </p>
+      )}
       <ResponsiveGridLayout
         key={view}
         onBreakpointChange={(breakpoint) => {
